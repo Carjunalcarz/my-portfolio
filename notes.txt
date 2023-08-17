@@ -1,0 +1,11 @@
+#My-Portfolio -React / Tailwind
+- Link 
+https://www.youtube.com/watch?v=2kg0z1qNrkw
+#github versioning Bossrod TV
+#github deployment - github pages
+= Link
+https://www.youtube.com/watch?v=4G6O0BIoq6M
+
+#hashlink for github diployment instead of Link
+- link 
+https://www.youtube.com/watch?v=Kui-U1ZQVvQ

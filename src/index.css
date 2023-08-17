@@ -20,6 +20,13 @@
   background-position: center;
   height: 250px;
 }
+.activity-div {
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 240px;
+   background-color: rgb(78, 91, 209);
+}
 
 .content-div:hover {
  
