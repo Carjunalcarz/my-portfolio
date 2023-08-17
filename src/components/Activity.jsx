@@ -1,10 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Burger from '../assets/projects/burger.png'
+import data from '../services/data'
 
 const Activity = () => {
+ const [orderState, setOrderState] = useState();
+ const [orderSet, orderSetState] = useState();
+ const [pushOrder, pushOrderState] = useState({
+    id: '',
+    order: '',
+    Image:'',
+ });
+
+ const selectOrder = (e,id)=> {
+        e.preventDefault();
+        const selectedID = id;
+        orderSetState(selectedID);
+        const selectedOrderState = data.filter((d) => d.id === orderSet)[0];
+        setOrderState(selectedOrderState);
+    
+      
+        newOrders(orderState?.id,orderState?.order,orderState?.Image);
+        // console.log(newOrders(orderState?.id,orderState?.order,orderState?.Image));
+
+    }
+
+
+let newOrders = (id,order,img)=> {
+
+    pushOrderState({
+        ...pushOrder,
+        id : id,
+        order:order,
+        Image:img
+    })
+
+
+}
+
+
 
   return (
     <>
@@ -46,15 +82,20 @@ const Activity = () => {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md opacity-90 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-                <p className='cursor-pointer font-bold  text-pink-600 block px-4 py-2 text-sm'>BURGER</p>
+            {data.map((d)=>  
+         
+             <Menu.Item key={d.id}>
+                  <a  onClick={(e)=>{
+                        selectOrder(e, d.id);
+                  }} className='block cursor-pointer font-bold  text-pink-600 block px-4 py-2 text-sm' >{d.order}</a>
             </Menu.Item>
-             <Menu.Item>
-                <p className='cursor-pointer font-bold text-pink-600 block px-4 py-2 text-sm'>ICE CREAM</p>
-            </Menu.Item>
-            <Menu.Item>
-                <p className='cursor-pointer font-bold text-pink-600 block px-4 py-2 text-sm'>COKE</p>
-            </Menu.Item>
+
+            
+           
+          )}
+
+            
+           
           
           </div>
         </Menu.Items>
@@ -63,12 +104,20 @@ const Activity = () => {
 
     
   </div>
-      <div className="text-[#040c16] shadow-lg shadow-[#040c16] group container rounded-md  pl-[20px] text-center items-center mx-auto activity-div">
 
-      </div>
-        <div className="text-[#040c16] shadow-lg shadow-[#040c16] group container rounded-md  pl-[20px] text-center items-center mx-auto activity-div">
+   
+    {console.log(pushOrder)}
+    {orderState?.id > 0 && 
+     <div
+
+         style={{ backgroundImage: `url(${pushOrder?.Image})` }}
+         key={orderState?.id} className="text-[#040c16] shadow-lg shadow-[#040c16] group container rounded-md  pl-[20px] text-center items-center mx-auto activity-div">
+     </div>
+      
+       
+       }
+    
         
-      </div>
 
 
 </div>
