@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AiFillPlusSquare } from "react-icons/ai";
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
@@ -6,41 +7,31 @@ import Burger from '../assets/projects/burger.png'
 import data from '../services/data'
 
 const Activity = () => {
- const [orderState, setOrderState] = useState();
- const [orderSet, orderSetState] = useState();
+//  const [orderState, setOrderState] = useState(0);
  const [pushOrder, pushOrderState] = useState({
     id: '',
     order: '',
     Image:'',
  });
 
+ const obj = pushOrder;
  const selectOrder = (e,id)=> {
         e.preventDefault();
-        const selectedID = id;
-        orderSetState(selectedID);
-        const selectedOrderState = data.filter((d) => d.id === orderSet)[0];
-        setOrderState(selectedOrderState);
+        const arr =  data.filter((d) => d.id === id)[0];
     
       
-        newOrders(orderState?.id,orderState?.order,orderState?.Image);
+        // newOrders(orderState?.id,orderState?.order,orderState?.Image);
         // console.log(newOrders(orderState?.id,orderState?.order,orderState?.Image));
+  
+            pushOrderState({
+        ...pushOrder,
+        id : arr.id,
+        order:arr.order,
+        Image:arr.Image
+            })
+    console.log(pushOrder);
 
     }
-
-
-let newOrders = (id,order,img)=> {
-
-    pushOrderState({
-        ...pushOrder,
-        id : id,
-        order:order,
-        Image:img
-    })
-
-
-}
-
-
 
   return (
     <>
@@ -84,10 +75,10 @@ let newOrders = (id,order,img)=> {
           <div className="py-1">
             {data.map((d)=>  
          
-             <Menu.Item key={d.id}>
-                  <a  onClick={(e)=>{
+             <Menu.Item key={d.id} className = "flex">
+                  <p onClick={(e)=>{
                         selectOrder(e, d.id);
-                  }} className='block cursor-pointer font-bold  text-pink-600 block px-4 py-2 text-sm' >{d.order}</a>
+                  }} className='cursor-pointer font-bold  text-pink-600 block px-4 py-2 text-sm' ><span  className='p-1 text-center text-m'><AiFillPlusSquare/></span> {d.order}</p>
             </Menu.Item>
 
             
@@ -105,13 +96,12 @@ let newOrders = (id,order,img)=> {
     
   </div>
 
-   
-    {console.log(pushOrder)}
-    {orderState?.id > 0 && 
+ 
+    {pushOrder?.id > 0 && 
      <div
 
          style={{ backgroundImage: `url(${pushOrder?.Image})` }}
-         key={orderState?.id} className="text-[#040c16] shadow-lg shadow-[#040c16] group container rounded-md  pl-[20px] text-center items-center mx-auto activity-div">
+         key={pushOrder?.id} className="text-[#040c16] shadow-lg shadow-[#040c16] group container rounded-md  pl-[20px] text-center items-center mx-auto activity-div">
      </div>
       
        
