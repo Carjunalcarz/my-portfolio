@@ -14,7 +14,6 @@ const Activity = () => {
     Image:'',
  });
 
- const obj = pushOrder;
  const selectOrder = (e,id)=> {
         e.preventDefault();
         const arr =  data.filter((d) => d.id === id)[0];
@@ -23,8 +22,7 @@ const Activity = () => {
         // newOrders(orderState?.id,orderState?.order,orderState?.Image);
         // console.log(newOrders(orderState?.id,orderState?.order,orderState?.Image));
   
-            pushOrderState({
-        ...pushOrder,
+   pushOrderState({
         id : arr.id,
         order:arr.order,
         Image:arr.Image
@@ -74,20 +72,12 @@ const Activity = () => {
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md opacity-90 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {data.map((d)=>  
-         
              <Menu.Item key={d.id} className = "flex">
                   <p onClick={(e)=>{
                         selectOrder(e, d.id);
                   }} className='cursor-pointer font-bold  text-pink-600 block px-4 py-2 text-sm' ><span  className='p-1 text-center text-m'><AiFillPlusSquare/></span> {d.order}</p>
             </Menu.Item>
-
-            
-           
           )}
-
-            
-           
-          
           </div>
         </Menu.Items>
       </Transition>
@@ -101,11 +91,29 @@ const Activity = () => {
      <div
 
          style={{ backgroundImage: `url(${pushOrder?.Image})` }}
-         key={pushOrder?.id} className="text-[#040c16] shadow-lg shadow-[#040c16] group container rounded-md  pl-[20px] text-center items-center mx-auto activity-div">
+         key={pushOrder?.id} className="relative text-[#040c16] shadow-lg shadow-[#040c16] group container rounded-md text-center items-center mx-auto activity-div">
+          <div className='absolute bottom-0 bg-white min-w-full h-[60px] opacity-60 text-left pl-3'>
+          
+          </div>
+          <div>
+          
+           <div className='absolute bottom-2 left-5'>
+             <p className='text-pink-600 text-2xl font-bold'>{pushOrder?.order}</p>
+           </div>
+          </div>
+          <div className='absolute bottom-2  right-3 max-w-full '>
+            <div className='flex  text-xl text-pink-600 font-bold w-20 ' >
+              <button data-action="decrement" class=" bg-pink-600 text-white hover:text-pink-300 hover:bg-pink-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                  <span class="m-auto text-2xl font-thin">−</span>
+                </button>
+                <input type="number" class="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-pink-400 focus:text-black  md:text-basecursor-default flex items-center text-pink-600  outline-none border-0" name="custom-input-number" value="0"></input>
+              <button data-action="increment" class=" bg-pink-600 text-white hover:text-pink-300 hover:bg-pink-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                <span class="m-auto text-2xl font-thin">+</span>
+              </button>
+          </div>
+          </div>
      </div>
-      
-       
-       }
+    }
     
         
 
